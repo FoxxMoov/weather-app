@@ -1,8 +1,8 @@
 <template>
-  <div class="h-screen flex-col items-center justify-center">
+  <div>
     <div class="flex-col items-center justify-center w-full">
       <div
-        class="mx-auto w-9/12 xl:w-7/12 flex-col flex items-center justify-start"
+        class="mx-auto w-9/12 xl:w-7/12 flex-col flex items-center justify-start mt-6"
       >
         <h1 class="text-gray-800 text-xl md:w-7/12">
           Cherchez une ville
@@ -47,10 +47,7 @@
       </div>
     </div>
     <transition name="fade">
-      <div
-        v-if="resultActive"
-        class="flex items-center justify-center w-full mb-4"
-      >
+      <div v-if="resultActive" class="flex items-center justify-center mb-4">
         <AppResult v-bind="weather" />
       </div>
     </transition>

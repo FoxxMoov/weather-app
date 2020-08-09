@@ -1,8 +1,8 @@
 <template>
   <div
-    class="border rounded md:w-9/12 xl:w-7/12 m-auto shadow-md bg-white mt-16"
+    class="border rounded w-11/12 md:w-9/12 xl:w-7/12 m-auto shadow-lg bg-white mt-16"
   >
-    <div class="flex justify-start p-8">
+    <div class="flex justify-start p-2 md:p-8">
       <div class="flex-col items-center w-full">
         <h1 class="text-3xl text-gray-800">{{ city_name }}</h1>
         <p>{{ localtime }}</p>
@@ -27,8 +27,15 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap justify-around p-8 m-auto">
-      <AppCards v-for="(card, i) in data" :key="i" :data-weather="card" />
+    <div
+      class="overflow-y-hidden overflow-x-scroll whitespace-no-wrap py-8 md:p-8 m-auto mx-2 md:flex md:justify-around"
+    >
+      <AppCards
+        v-for="(card, i) in data"
+        :key="i"
+        :data-weather="card"
+        class="inline-block"
+      />
     </div>
     <div class="w-full h-64">
       <AppMap :lattitude="lat" :longitude="lon" />

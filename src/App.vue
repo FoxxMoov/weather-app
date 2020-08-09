@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="flex flex-col h-screen">
+  <div id="app" class="flex flex-col justify-center h-screen">
     <Weather />
   </div>
 </template>
