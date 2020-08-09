@@ -15,15 +15,17 @@
           >
             <AppInput
               class="w-full"
-              v-model="cityName"
+              v-model="selected"
               type="text"
               placeholder="ex Paris"
             />
-            <Search
-              class="w-6 mr-4 cursor-pointer text-blue-600"
-              @click="weatherLauncher()"
-            />
+            <AppButton @click="weatherLauncher(cityName)">
+              <Search class="w-6 mr-4 cursor-pointer text-blue-600" />
+            </AppButton>
           </div>
+        </div>
+        <div class="text-base text-gray-light mt-6">
+          OU
         </div>
         <div
           class="w-9/12 xl:w-7/12 flex-col flex items-center justify-start mt-6"
@@ -65,6 +67,7 @@
 import Search from "../components/svg/search";
 import { weatherData } from "../script/weather";
 import AppInput from "../components/AppInput";
+import AppButton from "../components/AppButton";
 import AppResult from "../components/AppResult";
 import debounce from "lodash.debounce";
 import { cities } from "../cities/cities.json";
@@ -75,28 +78,30 @@ export default {
   components: {
     Search,
     AppInput,
+    AppButton,
     AppResult,
   },
 
   data() {
     return {
       cityName: "",
+      selected: "",
       weather: [],
       resultActive: false,
       error: undefined,
       cities,
-      selected: "",
     };
   },
 
   watch: {
-    cityName: {
-      handler: debounce(async function() {
-        this.resultActive = false;
-        this.error = undefined;
-        await this.weatherLauncher(this.cityName);
-      }, 500),
-    },
+    // cityName: {
+    //   handler: debounce(async function() {
+    //     this.resultActive = false;
+    //     this.error = undefined;
+    //     await this.weatherLauncher(this.cityName);
+    //     this.selected = "";
+    //   }, 500),
+    // },
 
     selected: {
       handler: debounce(async function() {
@@ -109,15 +114,17 @@ export default {
 
   methods: {
     async weatherLauncher(name) {
-      const response = await weatherData(name);
-      if (response != undefined) {
-        this.weather = response;
-        this.resultActive = true;
-      }
-      if (response?.error) {
-        this.error = {
-          message: "Cette ville n'héxiste pas",
-        };
+      if (this.selected) {
+        const response = await weatherData(name);
+        if (response != undefined) {
+          this.weather = response;
+          this.resultActive = true;
+        }
+        if (response?.error) {
+          this.error = {
+            message: "Cette ville n'héxiste pas",
+          };
+        }
       }
     },
   },
