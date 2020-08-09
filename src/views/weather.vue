@@ -1,45 +1,52 @@
 <template>
-  <div>
+  <div class="flex flex-col justify-center">
     <div class="flex-col items-center justify-center w-full">
       <div
-        class="mx-auto w-9/12 xl:w-7/12 flex-col flex items-center justify-start mt-6"
+        class="mx-auto w-full md:w-9/12 flex-col md:flex-row flex items-center"
       >
-        <h1 class="text-gray-800 text-xl md:w-7/12">
-          Cherchez une ville
-        </h1>
         <div
-          class="rounded-full h-10 text-base pl-4 w-10/12 md:w-7/12 flex items-center justify-between border"
+          class="w-9/12 xl:w-7/12 flex-col flex items-center justify-start mt-6"
         >
-          <AppInput
-            class="w-full"
-            v-model="cityName"
-            type="text"
-            placeholder="ex Paris"
-          />
-          <Search
-            class="w-6 mr-4 cursor-pointer text-blue-600"
-            @click="weatherLauncher()"
-          />
+          <h1 class="text-gray-800 text-xl md:w-7/12">
+            Cherchez une ville
+          </h1>
+          <div
+            class="rounded-full h-10 text-base pl-4 w-10/12 md:w-7/12 flex items-center justify-between border"
+          >
+            <AppInput
+              class="w-full"
+              v-model="cityName"
+              type="text"
+              placeholder="ex Paris"
+            />
+            <Search
+              class="w-6 mr-4 cursor-pointer text-blue-600"
+              @click="weatherLauncher()"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="mx-auto w-9/12 xl:w-7/12 flex-col flex items-center justify-start mt-6"
-      >
-        <h1 class="text-gray-800 text-xl md:w-7/12">
-          Sélectionnez une ville
-        </h1>
         <div
-          class="rounded-full h-10 text-base pl-4 w-10/12 md:w-7/12 flex items-center justify-between border"
+          class="w-9/12 xl:w-7/12 flex-col flex items-center justify-start mt-6"
         >
-          <select class="w-full mr-4 text-gray-800 bg-white" v-model="selected">
-            <option
-              v-for="(citie, i) in cities"
-              :key="i"
-              v-bind:value="citie.name"
+          <h1 class="text-gray-800 text-xl md:w-7/12">
+            Sélectionnez une ville
+          </h1>
+          <div
+            class="rounded-full h-10 text-base pl-4 w-10/12 md:w-7/12 flex items-center justify-between border"
+          >
+            <select
+              class="w-full mr-4 text-gray-800 bg-white"
+              v-model="selected"
             >
-              {{ citie.name }}
-            </option>
-          </select>
+              <option
+                v-for="(citie, i) in cities"
+                :key="i"
+                v-bind:value="citie.name"
+              >
+                {{ citie.name }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
       <div v-if="error">

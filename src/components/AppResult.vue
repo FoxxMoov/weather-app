@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="border rounded w-11/12 md:w-9/12 xl:w-7/12 m-auto shadow-lg bg-white mt-16"
-  >
+  <div class="border rounded w-11/12 md:w-7/12 m-auto shadow-lg bg-white mt-12">
     <div class="flex justify-start p-2 md:p-8">
       <div class="flex-col items-center w-full">
-        <h1 class="text-3xl text-gray-800">{{ city_name }}</h1>
+        <h1 class="text-3xl text-gray-800">{{ city_name }}, {{ timezone }}</h1>
         <p>{{ localtime }}</p>
         <p>{{ data[0].weather.description }}</p>
         <div class="flex items-center justify-between">
@@ -21,7 +19,7 @@
               Humidité : {{ data[0].rh }} %
             </p>
             <p class="text-xs md:text-lg text-gray-800">
-              Vent : {{ data[0].wind_spd }} m/S
+              Vent : {{ Math.ceil(data[0].wind_spd * 3.6) }} km/h
             </p>
           </div>
         </div>
