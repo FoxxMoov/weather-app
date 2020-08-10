@@ -6,7 +6,7 @@
     marginheight="0"
     marginwidth="0"
     :src="
-      `https://maps.google.com/maps?q=${lattitude},${longitude}&hl=fr&z=14&amp;output=embed`
+      `https://www.google.com/maps/embed/v1/place?key=AIzaSyCojgQWwAeCIFNq95eePsAWEv0NJjNpCcQ&q=${lattitude},${longitude}`
     "
   >
   </iframe>
@@ -16,14 +16,12 @@
 export default {
   props: {
     lattitude: {
-      type: String,
-      required: false,
-      default: "",
+      type: Number,
+      required: true,
     },
     longitude: {
-      type: String,
-      required: false,
-      default: "",
+      type: Number,
+      required: true,
     },
   },
 };

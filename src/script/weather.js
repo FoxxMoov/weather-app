@@ -3,10 +3,10 @@ import { API_KEY } from "../key/index";
 
 export async function weatherData(cityName) {
   try {
-    const { data, statusText } = await API.get(
-      `/forecast/daily?city=${cityName}&key=${API_KEY}&lang=fr&days=8`
+    const { data } = await API.get(
+      `/data/2.5/forecast?q=${cityName}&appid=${API_KEY}&units=metric&lang=fr`
     );
-    if (statusText === "OK") {
+    if (data.cod === "200") {
       return data;
     }
   } catch (e) {

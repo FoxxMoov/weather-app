@@ -4,10 +4,10 @@
     <img :src="icon" class="w-12 h-12 m-auto" />
     <div class="flex items-center justify-between w-full">
       <p class="text-sm text-gray-600">
-        {{ Math.ceil(dataWeather.max_temp) }}°
+        {{ Math.ceil(forecast.main.temp_max) }}°
       </p>
       <p class="text-sm text-gray-500">
-        {{ Math.ceil(dataWeather.min_temp) }}°
+        {{ Math.ceil(forecast.main.temp_min) }}°
       </p>
     </div>
   </div>
@@ -25,19 +25,23 @@ dayjs.extend(timezone);
 
 export default {
   props: {
-    dataWeather: {
+    forecast: {
       type: Object,
       required: true,
     },
   },
 
+  created() {
+    console.log(this.forecast);
+  },
+
   computed: {
     icon() {
-      return require(`../assets/weather/${this.dataWeather.weather.icon}.png`);
+      return `http://openweathermap.org/img/wn/${this.forecast.weather[0].icon}@2x.png`;
     },
 
     localtime() {
-      return dayjs(this.dataWeather.datetime).format("ddd");
+      return dayjs(this.forecast.dt_txt).format("ddd");
     },
   },
 };

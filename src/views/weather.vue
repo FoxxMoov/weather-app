@@ -86,7 +86,7 @@ export default {
     return {
       cityName: "",
       selected: "",
-      weather: [],
+      weather: {},
       resultActive: false,
       error: undefined,
       cities,
@@ -94,15 +94,6 @@ export default {
   },
 
   watch: {
-    // cityName: {
-    //   handler: debounce(async function() {
-    //     this.resultActive = false;
-    //     this.error = undefined;
-    //     await this.weatherLauncher(this.cityName);
-    //     this.selected = "";
-    //   }, 500),
-    // },
-
     selected: {
       handler: debounce(async function() {
         this.resultActive = false;
@@ -118,6 +109,7 @@ export default {
         const response = await weatherData(name);
         if (response != undefined) {
           this.weather = response;
+          console.log(this.weather);
           this.resultActive = true;
         }
         if (response?.error) {

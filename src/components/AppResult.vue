@@ -2,24 +2,26 @@
   <div class="border rounded w-11/12 md:w-7/12 m-auto shadow-lg bg-white mt-12">
     <div class="flex justify-start p-2 md:p-8">
       <div class="flex-col items-center w-full">
-        <h1 class="text-3xl text-gray-800">{{ city_name }}, {{ timezone }}</h1>
+        <h1 class="text-3xl text-gray-800">
+          {{ city.name }}, {{ city.country }}
+        </h1>
         <p>{{ localtime }}</p>
-        <p>{{ data[0].weather.description }}</p>
+        <p>{{ list[0].weather.description }}</p>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <img :src="icon" class="w-16 md:w-24 h-16 md:h-24" />
-            <p class="pl-4 text-2xl md:text-4xl">{{ data[0].temp }}</p>
+            <p class="pl-4 text-2xl md:text-4xl">{{ list[0].main.temp }}</p>
             <span class="mb-6">°C</span>
           </div>
           <div class="flex-col items-start md:w-4/12">
             <p class="text-xs md:text-lg text-gray-800">
-              Precipitation : {{ data[0].pop }} %
+              Ressentit : {{ list[0].main.feels_like }} °C
             </p>
             <p class="text-xs md:text-lg text-gray-800">
-              Humidité : {{ data[0].rh }} %
+              Humidité : {{ list[0].humidity }} %
             </p>
             <p class="text-xs md:text-lg text-gray-800">
-              Vent : {{ Math.ceil(data[0].wind_spd * 3.6) }} km/h
+              Vent : {{ Math.ceil(list[0].wind.speed * 3.6) }} km/h
             </p>
           </div>
         </div>
@@ -29,14 +31,14 @@
       class="overflow-y-hidden overflow-x-scroll whitespace-no-wrap py-8 md:p-8 m-auto mx-2 md:flex md:justify-around"
     >
       <AppCards
-        v-for="(card, i) in data"
+        v-for="(card, i) in list"
         :key="i"
-        :data-weather="card"
+        :forecast="card"
         class="inline-block"
       />
     </div>
     <div class="w-full h-64">
-      <AppMap :lattitude="lat" :longitude="lon" />
+      <AppMap :lattitude="city.coord.lat" :longitude="city.coord.lon" />
     </div>
   </div>
 </template>
@@ -55,25 +57,13 @@ dayjs.extend(timezone);
 
 export default {
   props: {
-    data: {
+    city: {
+      type: Object,
+      required: true,
+    },
+    list: {
       type: Array,
-      required: true,
-    },
-    city_name: {
-      type: String,
-      required: true,
-    },
-    timezone: {
-      type: String,
-      required: true,
-    },
-    lon: {
-      type: String,
-      required: true,
-    },
-    lat: {
-      type: String,
-      required: true,
+      require: true,
     },
   },
 
@@ -82,14 +72,18 @@ export default {
     AppCards,
   },
 
+  created() {
+    console.log(this.list);
+  },
+
   computed: {
     icon() {
-      return require(`../assets/weather/${this.data[0].weather.icon}.png`);
+      return `http://openweathermap.org/img/wn/${this.list[0].weather[0].icon}@2x.png`;
     },
 
     localtime() {
       return dayjs()
-        .tz(this.timezone)
+        .tz(this.list.dt_txt)
         .format("dddd");
     },
   },
