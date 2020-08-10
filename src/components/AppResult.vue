@@ -28,7 +28,7 @@
       </div>
     </div>
     <div
-      class="overflow-y-hidden overflow-x-scroll whitespace-no-wrap py-8 md:p-8 m-auto mx-2 md:flex md:justify-around"
+      class="overflow-y-hidden overflow-x-scroll whitespace-no-wrap md:p-8 m-auto"
     >
       <AppCards
         v-for="(card, i) in list"

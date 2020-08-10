@@ -56,7 +56,17 @@
       </div>
     </div>
     <transition name="fade">
-      <div v-if="resultActive" class="flex items-center justify-center mb-4">
+      <div
+        v-if="loading"
+        key="loading"
+        class="flex items-center justify-center h-full"
+      >
+        <AppLoader class="w-20 h-20 m-auto" />
+      </div>
+      <div
+        v-else-if="resultActive"
+        class="flex items-center justify-center mb-4"
+      >
         <AppResult v-bind="weather" />
       </div>
     </transition>
@@ -69,6 +79,7 @@ import { weatherData } from "../script/weather";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
 import AppResult from "../components/AppResult";
+import AppLoader from "../components/AppLoader";
 import debounce from "lodash.debounce";
 import { cities } from "../cities/cities.json";
 
@@ -80,6 +91,7 @@ export default {
     AppInput,
     AppButton,
     AppResult,
+    AppLoader,
   },
 
   data() {
@@ -90,16 +102,19 @@ export default {
       resultActive: false,
       error: undefined,
       cities,
+      loading: false,
     };
   },
 
   watch: {
     selected: {
       handler: debounce(async function() {
+        this.loading = true;
         this.resultActive = false;
         this.error = undefined;
         await this.weatherLauncher(this.selected);
-      }, 500),
+        this.loading = false;
+      }, 1000),
     },
   },
 
@@ -109,7 +124,6 @@ export default {
         const response = await weatherData(name);
         if (response != undefined) {
           this.weather = response;
-          console.log(this.weather);
           this.resultActive = true;
         }
         if (response?.error) {
