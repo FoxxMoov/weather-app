@@ -18,8 +18,4 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-
-```
-npm run lint
-```
+Or go see the result and test the app : http://cravet.eemi.tech/
