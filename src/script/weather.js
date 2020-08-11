@@ -10,6 +10,6 @@ export async function weatherData(cityName) {
       return data;
     }
   } catch (e) {
-    console.log(e);
+    return e;
   }
 }

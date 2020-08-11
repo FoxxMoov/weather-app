@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div v-if="error">
+      <div v-if="error" class="text-red-600 text-center my-4">
         {{ error.message }}
       </div>
     </div>
@@ -81,7 +81,7 @@ import AppButton from "../components/AppButton";
 import AppResult from "../components/AppResult";
 import AppLoader from "../components/AppLoader";
 import debounce from "lodash.debounce";
-import { cities } from "../cities/cities.json";
+import { cities } from "../cities/cities-fr.json";
 
 export default {
   name: "weather",
@@ -122,13 +122,13 @@ export default {
     async weatherLauncher(name) {
       if (this.selected) {
         const response = await weatherData(name);
-        if (response != undefined) {
+        if (response.cod === "200") {
           this.weather = response;
           this.resultActive = true;
         }
-        if (response?.error) {
+        if (response?.message) {
           this.error = {
-            message: "Cette ville n'héxiste pas",
+            message: response?.message,
           };
         }
       }
