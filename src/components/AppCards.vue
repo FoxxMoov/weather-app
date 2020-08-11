@@ -1,6 +1,6 @@
 <template>
   <div class="flex-col items-center justify-center p-2 xl:w-20">
-    <p>{{ localtime }}</p>
+    <p>{{ localtime }}h</p>
     <img :src="icon" class="w-12 h-12 m-auto" />
     <div class="flex items-center justify-between w-full">
       <p class="text-sm text-gray-600">
@@ -37,7 +37,7 @@ export default {
     },
 
     localtime() {
-      return dayjs(this.forecast.dt_txt).format("ddd");
+      return dayjs(this.forecast.dt_txt).format("ddd HH");
     },
   },
 };

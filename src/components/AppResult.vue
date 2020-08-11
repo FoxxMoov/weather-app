@@ -18,7 +18,7 @@
               Ressentit : {{ list[0].main.feels_like }} °C
             </p>
             <p class="text-xs md:text-lg text-gray-800">
-              Humidité : {{ list[0].humidity }} %
+              Humidité : {{ list[0].main.humidity }} %
             </p>
             <p class="text-xs md:text-lg text-gray-800">
               Vent : {{ Math.ceil(list[0].wind.speed * 3.6) }} km/h
