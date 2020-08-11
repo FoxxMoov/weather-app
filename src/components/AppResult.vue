@@ -72,10 +72,6 @@ export default {
     AppCards,
   },
 
-  created() {
-    console.log(this.list);
-  },
-
   computed: {
     icon() {
       return `http://openweathermap.org/img/wn/${this.list[0].weather[0].icon}@2x.png`;

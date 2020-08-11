@@ -31,10 +31,6 @@ export default {
     },
   },
 
-  created() {
-    console.log(this.forecast);
-  },
-
   computed: {
     icon() {
       return `http://openweathermap.org/img/wn/${this.forecast.weather[0].icon}@2x.png`;
