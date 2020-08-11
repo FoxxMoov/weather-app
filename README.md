@@ -18,6 +18,6 @@ npm run serve
 npm run build
 ```
 
-Or go see the result and test the app : http://cravet.eemi.tech/
+Or go see the result and test the app : http://cravet.eemi.tech/site/weatherApp-bis/
 
 Second branch available with another API.
